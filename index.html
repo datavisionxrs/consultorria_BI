@@ -1,468 +1,450 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposta BI Produção - Liko Química</title>
+    <title>Apresentação de Resultados | Jan–Set 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9; /* slate-100 */
+            color: #1e293b; /* slate-800 */
         }
-        /* Definição de cores personalizadas do DataVisionX */
-        .bg-datavision-primary { background-color: #4f46e5; } /* indigo-600 */
-        .text-datavision-primary { color: #4f46e5; }
-        .bg-datavision-dark { background-color: #3730a3; } /* indigo-800 */
-        .text-datavision-light { color: #e0e7ff; } /* indigo-100 */
-        .border-datavision-primary { border-color: #4f46e5; }
-        .ring-datavision-primary { --tw-ring-color: #4f46e5; }
+        .slide {
+            display: none;
+            min-height: 100vh;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        .slide.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .kpi-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0; /* slate-200 */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .highlight-card {
+             background-color: #ecfdf5; /* green-50 */
+             border-left: 4px solid #22c55e; /* green-500 */
+        }
+        .alert-card {
+             background-color: #fef2f2; /* red-50 */
+             border-left: 4px solid #ef4444; /* red-500 */
+        }
+        .recommendation-card {
+            background-color: #ffffff;
+            border-top: 4px solid #38bdf8; /* sky-400 */
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+        }
+         .recommendation-card:hover {
+            transform: scale(1.02);
+            background-color: #f8fafc; /* slate-50 */
+        }
     </style>
 </head>
-<body class="bg-slate-100">
+<body class="antialiased">
 
-    <main>
-        <!-- 💼 Capa (Hero Section) -->
-        <header class="relative shadow-lg md:min-h-[400px] bg-datavision-dark text-white">
-            <!-- Grid container for split-screen -->
-            <div class="h-full">
-                
-                <!-- Coluna de Texto (Esquerda) -->
-                <div class="p-10 md:p-16 lg:p-20 z-10 flex flex-col justify-center min-h-[400px]">
-                    <div class="max-w-2xl">
-                        <!-- Logo Liko -->
-                        <img src="https://www.liko.com.br/conteudo/logo-liko.png" alt="Logo Liko Química" class="h-12 md:h-16 mb-10"
-                             onerror="this.style.display='none'; this.nextSibling.style.display='block';">
-                        <!-- Fallback em texto caso o logo falhe -->
-                        <h2 style="display:none;" class="text-3xl font-bold text-white mb-10">Liko Química</h2>
+    <div class="fixed top-6 left-6 z-50">
+        <img src="https://static.wixstatic.com/media/6c80f8_34cb6e1f840c4e4e8564100c0908bf96~mv2.png/v1/fill/w_168,h_119,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo_acoriana_alimentos-removebg-preview.png" alt="Logotipo Açoriana Alimentos" class="h-16">
+    </div>
 
-                        <h1 class="text-4xl md:text-5xl font-bold">Implantação de BI na Produção</h1>
-                        <p class="text-xl md:text-2xl text-datavision-light mt-4 max-w-2xl">
-                            Transformando o controle produtivo em inteligência de desempenho.
-                        </p>
-                        
-                        <div class="mt-12 md:mt-20 text-lg flex flex-col md:flex-row justify-between gap-8">
-                            <div>
-                                <span class="font-semibold block opacity-80">Consultoria:</span>
-                                <span class="text-datavision-light">DataVisionX | Alberto Rossi</span>
-                            </div>
-                            <div>
-                                <span class="font-semibold block opacity-80">Cliente:</span>
-                                <span class="text-datavision-light">Liko Química</span>
-                            </div>
-                        </div>
-                    </div>
+    <main id="presentation" class="w-full">
+        <!-- Slide 1: Título -->
+        <section class="slide active flex-col justify-center items-center p-8 text-center">
+            <div class="max-w-4xl mx-auto">
+                <span class="text-lg font-semibold text-sky-500">Análise de Performance de Vendas</span>
+                <h1 class="text-5xl md:text-7xl font-black my-4 tracking-tight text-slate-900">Resultados Acumulados</h1>
+                <p class="text-2xl md:text-4xl font-bold text-slate-600">Janeiro a Setembro 2025</p>
+                <div class="mt-12 text-slate-500 text-sm">
+                    <p>Navegue usando os botões no canto inferior direito.</p>
                 </div>
-
-                <!-- Coluna da Imagem (Direita) - REMOVIDA -->
-                <!-- 
-                <div class="hidden md:flex md:col-span-2 bg-white items-center justify-center p-8 relative overflow-hidden">
-                    <img src="https://www.liko.com.br/fotos/LIKMAXIDUR-AUTONIVELANTE.PNG" 
-                         alt="Produto LIKMAXIDUR Autonivelante" 
-                         class="w-full max-w-md h-auto object-contain z-10"
-                         onerror="this.parentElement.innerHTML = '<div class=\'w-full h-full flex items-center justify-center bg-slate-100\'><p class=\'text-slate-500\'>Falha ao carregar imagem do produto.</p></div>';">
-                    
-                    
-                    <div class="absolute -bottom-1/4 -right-1/4 w-3/4 h-3/4 bg-datavision-primary opacity-5 rounded-full z-0"></div>
-                    <div class="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-datavision-primary opacity-5 rounded-full z-0"></div>
-                </div>
-                -->
-
             </div>
-        </header>
+        </section>
 
-        <!-- Conteúdo da Proposta -->
-        <div class="container mx-auto max-w-6xl -mt-16 z-20 relative">
-            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-                
-                <!-- 🧩 1. Contexto e Diagnóstico -->
-                <section class="p-8 md:p-12 border-b">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3 text-datavision-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                        </svg>
-                        1. Contexto e Diagnóstico
-                    </h2>
-                    <p class="text-lg text-slate-700 leading-relaxed">
-                        A Liko Química enfrenta desafios de integração e controle dos dados produtivos. As informações estão distribuídas entre planilhas, relatórios e o ERP, tornando difícil avaliar rendimento, eficiência, consumo e custos industriais.
+        <!-- Slide 2: Introdução -->
+        <section class="slide flex-col justify-center items-center p-8">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-10 text-sky-500">Resumo da Apresentação</h2>
+                <div class="text-xl text-slate-700 leading-relaxed text-left space-y-6">
+                    <p>
+                        Apresenta-se o resumo executivo dos resultados consolidados até setembro de 2025. Os números demonstram um período de crescimento robusto e sustentável, com as metas sendo alcançadas na média de 80 a 90% do planejado, e com avanço significativo em faturamento, volume e na base de clientes.
                     </p>
-                    <p class="text-lg text-slate-700 leading-relaxed mt-4">
-                        O BI permitirá automatizar a coleta, transformar dados brutos em indicadores e gerar visão unificada do desempenho produtivo.
+                    <p>
+                        Este relatório detalha a performance por grupos, produtos e canais, apontando tanto os grandes sucessos quanto os desafios que exigem atenção. As recomendações a seguir visam corrigir pontos críticos e garantir a continuidade da trajetória de crescimento sólido e rentável.
                     </p>
-                </section>
+                </div>
+            </div>
+        </section>
 
-                <!-- 🎯 2. Objetivo da Etapa Produção -->
-                <section class="p-8 md:p-12 border-b bg-slate-50">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3 text-datavision-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                        </svg>
-                        2. Objetivo da Etapa Produção
-                    </h2>
-                    <p class="text-lg text-slate-700 leading-relaxed mb-6">
-                        Implementar um painel de Business Intelligence focado na produção industrial, oferecendo visão completa de eficiência, consumo, perdas e custos.
-                    </p>
-                    
-                    <h3 class="text-xl font-semibold text-slate-700 mb-4">Metas Específicas:</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-3 text-green-500 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Controlar eficiência produtiva e perdas por lote.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-3 text-green-500 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Comparar consumo real vs padrão técnico.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-3 text-green-500 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Acompanhar custo de produção por produto e linha.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-3 text-green-500 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Monitorar tempo de ciclo e desempenho de OPs.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mr-3 text-green-500 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Criar alertas de desvios e gargalos.</span>
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- ⚙️ 3. Plano de Implantação -->
-                <section class="p-8 md:p-12 border-b">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-8 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3 text-datavision-primary">
-                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-                        </svg>
-                        3. Plano de Implantação BI – Etapa Produção
-                    </h2>
-                    <div class="overflow-x-auto rounded-lg border">
-                        <table class="min-w-full divide-y divide-slate-200">
-                            <thead class="bg-slate-100">
-                                <tr>
-                                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-datavision-primary tracking-wider uppercase">Fase</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-slate-600 tracking-wider uppercase">Atividade</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-slate-600 tracking-wider uppercase">Entregas</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-slate-600 tracking-wider uppercase">Prazo</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-slate-600 tracking-wider uppercase">Responsável</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-slate-200">
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">1. Diagnóstico</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Mapear fluxos, planilhas e ERP</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Mapa de dados e processos</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600"><span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full font-medium">Semana 1</span></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">DataVisionX + Liko</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">2. Modelagem e ETL</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Padronizar dados de OP, insumos e rendimento</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Base unificada pronta para BI</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600"><span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full font-medium">Semana 2</span></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">DataVisionX</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">3. Indicadores (DAX)</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Cálculos de rendimento, eficiência, custo/kg</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Modelo relacional Power BI</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600"><span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full font-medium">Semana 3</span></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">DataVisionX</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">4. Painel Power BI</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Dashboard de Produção com KPIs e filtros</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Painel “Produção Liko v1”</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600"><span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full font-medium">Semana 4</span></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">DataVisionX</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">5. Treinamento</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Workshop e manual de indicadores</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Capacitação + documentação</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600"><span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full font-medium">Semana 5</span></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">DataVisionX</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">6. Acompanhamento</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Ajustes e suporte pós-implantação</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Revisão + refresh automático</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600"><span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full font-medium">Semana 6</span></td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">DataVisionX</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <!-- 📊 4. Indicadores-Chave (KPIs) -->
-                <section class="p-8 md:p-12 border-b bg-slate-50">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-8 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3 text-datavision-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25A1.125 1.125 0 0 1 9.75 19.875V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-                        </svg>
-                        4. Indicadores-Chave (KPIs da Produção)
-                    </h2>
-                    <div class="overflow-x-auto rounded-lg border">
-                        <table class="min-w-full divide-y divide-slate-200">
-                            <thead class="bg-slate-100">
-                                <tr>
-                                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-datavision-primary tracking-wider uppercase">Categoria</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-slate-600 tracking-wider uppercase">Indicador</th>
-                                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-slate-600 tracking-wider uppercase">Descrição</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-slate-200">
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Eficiência</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">Eficiência Global da Produção (OEE)</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Relação entre tempo produtivo e tempo total disponível</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Rendimento</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">Rendimento por Lote (%)</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Produção líquida vs consumo de insumo</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Custo</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">Custo de Produção por Kg</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Total de insumos + perdas / kg produzido</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Qualidade</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">Perdas e Retrabalho (%)</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Percentual de produto não conforme</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Tempo</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">Tempo Médio de Produção</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Duração média por OP ou lote</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">Consumo</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">Desvio Real x Padrão</td>
-                                    <td class="px-6 py-4 whitespace-normal text-sm text-slate-600">Diferença entre consumo previsto e real</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <!-- 📈 5. Resultados Esperados -->
-                <section class="p-8 md:p-12 border-b">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3 text-datavision-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
-                        </svg>
-                        5. Resultados Esperados
-                    </h2>
-                    <ul class="space-y-4 mt-6">
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7 mr-3 text-green-600 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-xl text-slate-700">Aumento da eficiência produtiva.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7 mr-3 text-green-600 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-xl text-slate-700">Clareza sobre custos por produto e linha.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7 mr-3 text-green-600 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-xl text-slate-700">Base sólida para expansão do BI (Financeiro e Comercial).</span>
-                        </li>
-                        <li class="flex items-start">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7 mr-3 text-green-600 flex-shrink-0 mt-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                            </svg>
-                            <span class="text-xl text-slate-700">Maior autonomia analítica e agilidade na tomada de decisão.</span>
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- 🚀 6. Expansão Futura -->
-                <section class="p-8 md:p-12 border-b bg-slate-50">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3 text-datavision-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m5.841-2.58L17.5 16.5m-2.844-2.844L21 12m0 0L17.5 7.5M21 12H3" />
-                        </svg>
-                        6. Expansão Futura (Fases 2 e 3)
-                    </h2>
-                    <ul class="space-y-3 mt-6">
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-3 text-datavision-primary flex-shrink-0">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Integração com Estoque e Compras.</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-3 text-datavision-primary flex-shrink-0">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Inclusão de custos financeiros e margens.</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-3 text-datavision-primary flex-shrink-0">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Dashboards comparativos (Produção x Vendas x Financeiro).</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 mr-3 text-datavision-primary flex-shrink-0">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                            </svg>
-                            <span class="text-lg text-slate-700">Indicadores ESG (desperdício, reaproveitamento, emissões).</span>
-                        </li>
-                    </ul>
-                </section>
-                
-                <!-- 💰 7. Investimento e Planos -->
-                <section class="p-8 md:p-12 border-b">
-                    <h2 class="text-3xl font-bold text-slate-800 mb-8 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3 text-datavision-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.21 12.77 10.5 12 10.5s-1.536.71-2.121 1.159c-1.172.879-1.172 2.303 0 3.182l.879.659Z" />
-                        </svg>
-                        7. Investimento e Planos
-                    </h2>
-
-                    <!-- Cards de Planos -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                        <!-- Plano Básico -->
-                        <div class="border rounded-lg p-6 shadow-sm flex flex-col">
-                            <h3 class="text-xl font-semibold text-datavision-primary">Plano Básico</h3>
-                            <p class="text-3xl font-bold text-slate-800 my-4">R$ 3.500<span class="text-lg font-normal text-slate-600">/mês</span></p>
-                            <p class="text-slate-600 font-medium mb-4 -mt-2">20 horas/mês</p>
-                            <ul class="space-y-2 text-slate-700 flex-grow">
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>Cobertura de 1 módulo</li>
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>Suporte básico</li>
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>1 reunião de alinhamento por mês</li>
-                            </ul>
-                        </div>
-
-                        <!-- Plano Intermediário (Destaque) -->
-                        <div class="border-2 border-datavision-primary rounded-lg p-6 shadow-lg relative flex flex-col">
-                            <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-datavision-primary text-white px-3 py-1 rounded-full text-sm font-semibold">Recomendado</span>
-                            <h3 class="text-xl font-semibold text-datavision-primary">Plano Intermediário</h3>
-                            <p class="text-3xl font-bold text-slate-800 my-4">R$ 4.400<span class="text-lg font-normal text-slate-600">/mês</span></p>
-                            <p class="text-slate-600 font-medium mb-4 -mt-2">36 horas/mês</p>
-                            <ul class="space-y-2 text-slate-700 flex-grow">
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>2 módulos</li>
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>Relatórios executivos + operacionais</li>
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>Suporte + 1 workshop/trimestral</li>
-                            </ul>
-                        </div>
-
-                        <!-- Plano Premium -->
-                        <div class="border rounded-lg p-6 shadow-sm flex flex-col">
-                            <h3 class="text-xl font-semibold text-datavision-primary">Plano Premium</h3>
-                            <p class="text-3xl font-bold text-slate-800 my-4">R$ 6.200<span class="text-lg font-normal text-slate-600">/mês</span></p>
-                            <p class="text-slate-600 font-medium mb-4 -mt-2">52 horas/mês</p>
-                            <ul class="space-y-2 text-slate-700 flex-grow">
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>3+ módulos</li>
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>Automações e governança dos dados</li>
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>Reuniões estratégicas mensais</li>
-                                <li class="flex items-start"><span class="text-datavision-primary mr-2 mt-1.5">›</span>Roadmap de evolução</li>
-                            </ul>
+        <!-- Slide 3: Resumo Executivo -->
+        <section class="slide flex-col justify-center items-center p-4 sm:p-8">
+            <div class="w-full max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-10">Indicadores Gerais <span class="text-sky-500">(vs. 2024)</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Faturamento -->
+                    <div class="kpi-card p-6 rounded-2xl text-center">
+                        <h3 class="text-slate-500 text-sm font-semibold uppercase">Faturamento</h3>
+                        <p class="text-4xl font-extrabold my-2 text-slate-900">R$ 24,69M</p>
+                        <div class="flex items-center justify-center text-green-600 font-bold text-xl">
+                           <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                            <span>+19,5%</span>
                         </div>
                     </div>
-
-                    <!-- Detalhes da Implantação -->
-                    <div class="mt-12 border-t pt-8 bg-slate-50 p-6 rounded-lg">
-                        <h4 class="text-xl font-semibold text-slate-700 mb-4">Detalhes da Implantação e Manutenção</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-slate-800 mb-4">
-                            <div><span class="font-medium text-slate-600">Horas de Trabalho:</span> 20h a 52h/mês</div>
-                            <div><span class="font-medium text-slate-600">Custo por Hora:</span> R$ 119 a R$ 175</div>
-                        </div>
-                        
-                        <h5 class="font-semibold text-slate-700 mt-4 mb-2">Inclui:</h5>
-                        <ul class="list-disc list-inside space-y-1 text-slate-700">
-                            <li>Criação do modelo de dados e dashboards Power BI.</li>
-                            <li>Integração com ERP (via planilhas ou exportações manuais).</li>
-                            <li>Definição e validação dos principais KPIs por módulo.</li>
-                            <li>Treinamento operacional (2h) + suporte mensal.</li>
-                            <li>4 horas semanal presencial</li>
-                        </ul>
-                        
-                        <p class="mt-4 bg-indigo-100 text-indigo-800 p-3 rounded-md font-medium">
-                            <span class="font-bold">Ideal para:</span> validação de resultados e implantação modular (ex: Comercial ou Produção).
-                        </p>
-                    </div>
-                </section>
-
-                <!-- 🧾 8. Identificação do Projeto -->
-                <section class="p-8 md:p-12 bg-slate-50">
-                     <h2 class="text-3xl font-bold text-slate-800 mb-8 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mr-3 text-datavision-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A1.5 1.5 0 0 1 18 21.75H6.75a1.5 1.5 0 0 1-1.499-1.632Z" />
-                        </svg>
-                        8. Identificação do Projeto
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
-                        <div>
-                            <span class="block text-sm font-medium text-slate-500">Consultoria</span>
-                            <span class="block text-lg font-semibold text-slate-800">DataVisionX</span>
-                        </div>
-                        <div>
-                            <span class="block text-sm font-medium text-slate-500">Responsável</span>
-                            <span class="block text-lg font-semibold text-slate-800">Alberto Rossi</span>
-                        </div>
-                        <div>
-                            <span class="block text-sm font-medium text-slate-500">Cliente</span>
-                            <span class="block text-lg font-semibold text-slate-800">Liko Química</span>
-                        </div>
-                        <div>
-                            <span class="block text-sm font-medium text-slate-500">Foco</span>
-                            <span class="block text-lg font-semibold text-slate-800">Etapa Produção</span>
-                        </div>
-                        <div>
-                            <span class="block text-sm font-medium text-slate-500">Prazo Total</span>
-                            <span class="block text-lg font-semibold text-slate-800">Prazo indeterminado</span>
-                        </div>
-                        <div>
-                            <span class="block text-sm font-medium text-slate-500">Ferramenta</span>
-                            <span class="block text-lg font-semibold text-slate-800">Microsoft Power BI</span>
+                    <!-- Volume -->
+                    <div class="kpi-card p-6 rounded-2xl text-center">
+                        <h3 class="text-slate-500 text-sm font-semibold uppercase">Volume</h3>
+                        <p class="text-4xl font-extrabold my-2 text-slate-900">5,19M</p>
+                         <div class="flex items-center justify-center text-green-600 font-bold text-xl">
+                           <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                            <span>+14,1%</span>
                         </div>
                     </div>
-                     <div class="mt-8 pt-8 border-t border-slate-200">
-                         <span class="block text-sm font-medium text-slate-500">Contato</span>
-                         <span class="block text-lg font-semibold text-datavision-primary">datavvisionx@gmail.com | (51) 98280-5652</span>
+                    <!-- Positivados -->
+                    <div class="kpi-card p-6 rounded-2xl text-center">
+                        <h3 class="text-slate-500 text-sm font-semibold uppercase">Clientes Positivados</h3>
+                        <p class="text-4xl font-extrabold my-2 text-slate-900">3.190</p>
+                        <div class="flex items-center justify-center text-green-600 font-bold text-xl">
+                            <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                            <span>+16,3%</span>
+                        </div>
+                    </div>
+                    <!-- Ticket Médio -->
+                    <div class="kpi-card p-6 rounded-2xl text-center">
+                        <h3 class="text-slate-500 text-sm font-semibold uppercase">Ticket Médio</h3>
+                        <p class="text-4xl font-extrabold my-2 text-slate-900">R$ 329,19</p>
+                         <div class="flex items-center justify-center text-green-600 font-bold text-xl">
+                            <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                            <span>+9,7%</span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="mt-8 text-center text-lg text-slate-600">
+                    <p>Crescimento sustentável em todas as frentes: <span class="font-bold text-slate-800">mais clientes, mais volume, maior ticket e faturamento recorde.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Contribuição por Grupo -->
+        <section class="slide flex-col justify-center items-center p-8">
+             <div class="w-full max-w-5xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-10">Contribuição por Grupo <span class="text-sky-500">no Faturamento</span></h2>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <canvas id="contributionChart" class="max-w-md mx-auto"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 5: Análise Grupo 01 -->
+        <section class="slide flex-col justify-center items-center p-4 sm:p-8">
+            <div class="w-full max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-8">Análise de Performance: <span class="text-sky-500">Grupo 01</span></h2>
+                <div class="text-center mb-8">
+                     <p class="text-2xl font-bold">R$ 11,02 M em Faturamento <span class="text-green-600 font-semibold">(+12,83%)</span></p>
+                     <p class="text-slate-500">Base sólida com crescimento consistente, mas com rotas que demandam atenção.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-green-600">Destaques (↑)</h3>
+                        <div class="space-y-4">
+                            <div class="highlight-card p-4 rounded-lg">
+                                 <p class="font-bold text-lg text-green-900">ROTA 25: Crescimento Expressivo (+52,4%)</p>
+                            </div>
+                            <div class="highlight-card p-4 rounded-lg">
+                                 <p class="font-bold text-lg text-green-900">ROTA 19: Forte Aumento de Faturamento (+36,8%)</p>
+                            </div>
+                            <div class="highlight-card p-4 rounded-lg">
+                                 <p class="font-bold text-lg text-green-900">ROTA 02: Desempenho Sólido (+16,0%)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-red-600">Alertas (↓)</h3>
+                        <div class="space-y-4">
+                             <div class="alert-card p-4 rounded-lg">
+                                <p class="font-bold text-lg text-red-900">ROTA 16: Queda de Volume e Positivação</p>
+                                <p class="text-red-800 text-sm">Faturamento +1,9% | Volume <span class="font-bold">-3,0%</span> | Positivação <span class="font-bold">-2,2%</span>.</p>
+                            </div>
+                            <div class="alert-card p-4 rounded-lg">
+                                <p class="font-bold text-lg text-red-900">ROTA 14: Queda na Base de Clientes</p>
+                                <p class="text-red-800 text-sm">Faturamento +8,2% | Positivação <span class="font-bold">-1,0%</span>. Crescimento apoiado em ticket, mas perdendo clientes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Análise Grupo 02 -->
+        <section class="slide flex-col justify-center items-center p-4 sm:p-8">
+            <div class="w-full max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-8">Análise de Performance: <span class="text-sky-500">Grupo 02</span></h2>
+                 <div class="text-center mb-8">
+                     <p class="text-2xl font-bold">R$ 10,12 M em Faturamento <span class="text-green-600 font-semibold">(+20,77%)</span></p>
+                     <p class="text-slate-500">Crescimento forte impulsionado por rotas de alta performance.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-green-600">Destaques (↑)</h3>
+                        <div class="space-y-4">
+                            <div class="highlight-card p-4 rounded-lg">
+                                <p class="font-bold text-lg text-green-900">ROTA 24: Crescimento Exponencial (+163%)</p>
+                            </div>
+                             <div class="highlight-card p-4 rounded-lg">
+                                <p class="font-bold text-lg text-green-900">ROTA 03: Desempenho Robusto (+34,4%)</p>
+                            </div>
+                             <div class="highlight-card p-4 rounded-lg">
+                                <p class="font-bold text-lg text-green-900">ROTA 18: Alta Performance (+32,7%)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-yellow-500">Pontos de Atenção</h3>
+                         <div class="space-y-4">
+                            <div class="alert-card p-4 rounded-lg bg-yellow-50 border-l-yellow-400">
+                                <p class="font-bold text-lg text-yellow-900">ROTAS 17 & 20: Queda de Volume</p>
+                                <p class="text-yellow-800 text-sm">Apresentaram queda de volume (-3,1% e -1,4% respectivamente), indicando que o faturamento é sustentado por preço/mix.</p>
+                            </div>
+                            <div class="alert-card p-4 rounded-lg bg-yellow-50 border-l-yellow-400">
+                                <p class="font-bold text-lg text-yellow-900">ROTA 15: Perda de Clientes</p>
+                                <p class="text-yellow-800 text-sm">Apresentou queda expressiva na positivação (-9,8%), um ponto de alerta crítico.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Análise Grupo 03 -->
+        <section class="slide flex-col justify-center items-center p-4 sm:p-8">
+            <div class="w-full max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-8">Análise de Performance: <span class="text-sky-500">Grupo 03</span></h2>
+                 <div class="text-center mb-8">
+                     <p class="text-2xl font-bold">R$ 3,07 M em Faturamento <span class="text-green-600 font-semibold">(+46%)</span></p>
+                     <p class="text-slate-500">Motor de crescimento da empresa, com expansão acelerada.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-green-600 text-center">Destaques (↑)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="highlight-card p-4 rounded-lg text-center">
+                            <p class="font-bold text-lg text-green-900">ROTA 22</p>
+                            <p class="text-green-800 text-2xl font-bold">+61%</p>
+                        </div>
+                         <div class="highlight-card p-4 rounded-lg text-center">
+                            <p class="font-bold text-lg text-green-900">ROTA 21</p>
+                            <p class="text-green-800 text-2xl font-bold">+57%</p>
+                        </div>
+                         <div class="highlight-card p-4 rounded-lg text-center">
+                            <p class="font-bold text-lg text-green-900">ROTA 23</p>
+                            <p class="text-green-800 text-2xl font-bold">+49%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 8: Produtos e Canais -->
+         <section class="slide flex-col justify-center items-center p-4 sm:p-8">
+            <div class="w-full max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-10">Análise de Produtos e Canais</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Produtos -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-sky-500">Produtos</h3>
+                        <div class="space-y-4">
+                            <div class="highlight-card p-4 rounded-lg">
+                               <p class="font-bold text-lg text-green-900">Campeões de Venda (↑)</p>
+                               <p class="text-green-800 text-sm">Pão de Alho (+29%), Pastéis (+27%) e Nhoque (+54%) puxaram o crescimento.</p>
+                            </div>
+                             <div class="alert-card p-4 rounded-lg">
+                               <p class="font-bold text-lg text-red-900">Itens Críticos (↓)</p>
+                               <p class="text-red-800 text-sm">Batata Palha (-32%), Salgadões (~ -15%) e algumas massas perderam relevância.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Canais -->
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-sky-500">Canais</h3>
+                         <div class="space-y-4">
+                            <div class="bg-white p-4 rounded-lg border border-slate-200">
+                               <p class="font-bold text-lg text-slate-900">Varejo Tradicional</p>
+                               <p class="text-slate-600 text-sm">Responde por ~85% do faturamento, com crescimento consistente de <span class="font-bold text-green-600">+14%</span>. Mantém robustez e margem.</p>
+                            </div>
+                             <div class="bg-white p-4 rounded-lg border border-slate-200">
+                               <p class="font-bold text-lg text-slate-900">Grandes Redes</p>
+                               <p class="text-slate-600 text-sm">Já representam 12-15% do total (vs. 10% em 2024), crescendo <span class="font-bold text-green-600">+15%</span>. Trazem volume e visibilidade.</p>
+                            </div>
+                             <div class="highlight-card p-4 rounded-lg">
+                               <p class="font-bold text-lg text-green-900">Destaques Redes (↑)</p>
+                               <p class="text-green-800 text-sm">AMMPA (NOVA), GÊMEOS (NOVA, +195%), WS (+95%), DESCO (+66%), IMEC (+55%), ECONOMIX (+42%), VIA 2 (+22%).</p>
+                            </div>
+                            <div class="alert-card p-4 rounded-lg bg-yellow-50 border-l-yellow-400">
+                                <p class="font-bold text-lg text-yellow-900">Pontos de Atenção</p>
+                                <p class="text-yellow-800 text-sm"><span class="font-bold">Crescimento Modesto:</span> REDEFORT (+5%) apesar de representar 25% do volume das redes.</p>
+                                <p class="text-yellow-800 text-sm mt-2"><span class="font-bold">Sinais de Alerta com Quedas:</span> GRUPO LANZ, MACHADO, ACERTE, MUNCO REAL, NUMES, MEU SUPER E MÔNACO.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Slide 9: Recomendações -->
+        <section class="slide flex-col justify-center items-center p-8">
+            <div class="w-full max-w-7xl mx-auto">
+                 <h2 class="text-4xl font-bold text-center mb-10">Recomendações e Próximos Passos</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <!-- Rec 1 -->
+                     <div class="recommendation-card p-6 rounded-lg">
+                         <h3 class="text-xl font-bold mb-3 text-sky-500">Escalar o Sucesso (G3)</h3>
+                         <p class="text-slate-600">Recomenda-se a expansão da atuação nas rotas de alto crescimento (<span class="font-bold">21, 22, 23</span>) com reforço de logística, equipe e marketing local.</p>
                      </div>
-                </section>
-
+                      <!-- Rec 2 -->
+                     <div class="recommendation-card p-6 rounded-lg">
+                         <h3 class="text-xl font-bold mb-3 text-sky-500">Plano de Recuperação</h3>
+                         <p class="text-slate-600">Sugere-se a implementação de ações comerciais focadas nas rotas críticas (<span class="font-bold">R11, R14, 08, 10, 17</span>) para reativar clientes e reverter a queda de volume.</p>
+                     </div>
+                      <!-- Rec 3 -->
+                      <div class="recommendation-card p-6 rounded-lg">
+                         <h3 class="text-xl font-bold mb-3 text-sky-500">Otimizar Portfólio</h3>
+                         <p class="text-slate-600">Recomenda-se a proteção dos produtos campeões e a avaliação do reposicionamento ou substituição da linha de Batata Palha e Salgadões.</p>
+                     </div>
+                       <!-- Rec 4 -->
+                     <div class="recommendation-card p-6 rounded-lg">
+                         <h3 class="text-xl font-bold mb-3 text-sky-500">Equilibrar Canais</h3>
+                         <p class="text-slate-600">Propõe-se acelerar o crescimento nas grandes redes, por meio de negociações que protejam a rentabilidade, sem perder o foco no varejo.</p>
+                     </div>
+                       <!-- Rec 5 -->
+                     <div class="recommendation-card p-6 rounded-lg">
+                         <h3 class="text-xl font-bold mb-3 text-sky-500">Foco em Rentabilidade</h3>
+                         <p class="text-slate-600">Recomenda-se incentivar o aumento do mix de produtos por cliente para continuar elevando o ticket médio e a margem consolidada.</p>
+                     </div>
+                 </div>
             </div>
-        </div>
+        </section>
+        
+        <!-- Slide 10: Conclusão -->
+        <section class="slide flex-col justify-center items-center p-8 text-center">
+             <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold mb-6">Conclusão</h2>
+                 <p class="text-xl text-slate-600 leading-relaxed">
+                    O acumulado de 2025 consolida um <span class="font-bold text-green-600">crescimento saudável e diversificado</span>. O desafio estratégico é <span class="font-bold text-yellow-500">corrigir as rotas e produtos em queda</span>, enquanto escalamos o crescimento em novas regiões e redes, <span class="font-bold text-red-600">sem sacrificar a margem de lucro</span>.
+                </p>
+            </div>
+        </section>
     </main>
+    
+    <!-- Navegação -->
+    <div id="navigation" class="fixed bottom-8 right-8 flex space-x-3">
+        <button id="prevBtn" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold p-3 rounded-full transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed">
+             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button id="nextBtn" class="bg-sky-500 hover:bg-sky-600 text-white font-bold p-3 rounded-full transition-all duration-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+    </div>
 
-    <!-- Footer -->
-    <footer class="text-center py-10 px-6 mt-12">
-        <p class="text-slate-600 font-semibold text-lg">DataVisionX</p>
-        <p class="text-slate-500 text-sm">© 2025 DataVisionX | Transformando Dados em Decisões.</p>
-    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentSlide = 0;
 
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === slides.length - 1;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            });
+
+            // Inicializa a apresentação
+            showSlide(currentSlide);
+
+            // Gráfico de Contribuição
+            const ctx = document.getElementById('contributionChart').getContext('2d');
+            const contributionChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Grupo 01', 'Grupo 02', 'Grupo 03'],
+                    datasets: [{
+                        data: [11.13, 10.05, 3.07],
+                        backgroundColor: [
+                            '#38bdf8', // sky-400
+                            '#22c55e', // green-500
+                            '#f97316', // orange-500
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 4,
+                        hoverOffset: 12
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#475569', // slate-600
+                                font: {
+                                    size: 14,
+                                    weight: '600'
+                                },
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    let total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                    let value = context.parsed;
+                                    let percentage = ((value / total) * 100).toFixed(2);
+                                    if (context.parsed !== null) {
+                                        label += 'R$ ' + value.toFixed(2) + 'M (' + percentage + '%)';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
